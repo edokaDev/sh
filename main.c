@@ -27,6 +27,11 @@ int main(void)
 			free(input);
 			exit(EXIT_SUCCESS);
 		}
+		if (strcmp(input, "env") == 0)
+		{
+			print_env(env);
+			continue;
+		}
 		free(input);
 		input = NULL;
 		len = 0;

@@ -12,8 +12,7 @@ int main(void)
 	size_t len = 0;
 	ssize_t nread = 0;
 
-	do
-	{
+	do {
 		write(STDOUT_FILENO, prompt, strlen(prompt));
 		nread = getline(&input, &len, stdin);
 		if (!nread)
@@ -31,8 +30,7 @@ int main(void)
 		free(input);
 		input = NULL;
 		len = 0;
-	}
-	while(1);
+	} while (1);
 
 	return (0);
 }

@@ -12,6 +12,14 @@ void parse_input(char *input, char **cmd);
 void print_env(char *envp[]);
 char *get_path(char *input, char **envp);
 void free_input(char **cmd);
-struct stat statbuf;
+
+/* string functions */
+char *_strcat(char *dest, char *src);
+int _strcmp(char *s1, char *s2);
+char *_strcpy(char *dest, char *src);
+unsigned int _strcspn(char *s, char *reject);
+char *_strdup(char *str);
+int _strlen(char *s);
+
 
 #endif /* MAIN_H */

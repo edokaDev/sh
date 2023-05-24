@@ -15,31 +15,31 @@ char *get_path(char *input, char **envp)
 	char *curr_path = NULL, *paths = NULL, *curr_copy = NULL, *result = NULL;
 
 	if (input[0] == '/')
-		return (strdup(input));
+		return (_strdup(input));
 	while (envp[i] != NULL)
 	{
 		if (envp[i][0] == 'P' && envp[i][1] == 'A'
 			&& envp[i][2] == 'T' && envp[i][3] == 'H' && envp[i][4] == '=')
 		{
-			paths = strdup(envp[i] + 5);
+			paths = _strdup(envp[i] + 5);
 			curr_path = strtok(paths, ":");
 			while (curr_path != NULL)
 			{
-				curr_copy = malloc(strlen(curr_path) + strlen(input) + 2);
+				curr_copy = malloc(_strlen(curr_path) + _strlen(input) + 2);
 				if (curr_copy == NULL)
 				{
 					printf("Unable to allocate memory\n");
 					free(paths);
-					return (strdup(input));
-				} strcpy(curr_copy, curr_path), strcat(strcat(curr_copy, "/"), input);
+					return (_strdup(input));
+				} _strcpy(curr_copy, curr_path), _strcat(_strcat(curr_copy, "/"), input);
 				if (access(curr_copy, F_OK) == 0)
 				{
-					result = strdup(curr_copy);
+					result = _strdup(curr_copy);
 					free(paths);
 					free(curr_copy);
 					return (result);
 				} free(paths);
-				paths = strdup(curr_copy);
+				paths = _strdup(curr_copy);
 				free(curr_copy);
 				curr_path = strtok(NULL, ":");
 			} break;
@@ -47,8 +47,8 @@ char *get_path(char *input, char **envp)
 	}
 	if (paths != NULL)
 	{
-		result = strdup(input);
+		result = _strdup(input);
 		free(paths);
 		return (result);
-	} return (strdup(input));
+	} return (_strdup(input));
 }

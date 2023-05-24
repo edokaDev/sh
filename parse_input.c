@@ -11,13 +11,13 @@ void parse_input(char *input, char **cmd)
 {
 	int i = 0;
 	char *token;
-	char *input_copy = strdup(input);
+	char *input_copy = _strdup(input);
 
 	token = strtok(input_copy, " ");
 
 	while (token != NULL)
 	{
-		cmd[i++] = strdup(token);
+		cmd[i++] = _strdup(token);
 		token = strtok(NULL, " ");
 	}
 	cmd[i] = NULL;

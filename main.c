@@ -4,49 +4,50 @@
  * main - shell
  * @argc: argument count
  * @argv: array of arguments
- * @env: array of environs variable passed to the function
+ * @env: array of environs variable passed to the functino
  *
  * Return: on success 0, on failure... non-zero.
 */
 int main(int __attribute__ ((unused)) argc, char *argv[], char *env[])
 {
-	char *input = NULL, *prompt = "$ ", *cmd[50], *path;
+	struct stat statbuf;
+	char *input = NULL;
 	size_t len = 0;
 	ssize_t nread = 0;
+	char *prompt = "#cisfun$ ";
+	char *cmd[] = {NULL};
 	pid_t child;
 	int status;
 
-	do {
-		write(STDOUT_FILENO, prompt, strlen(prompt));
+	while (nread != -1)
+	{
+		printf("%s", prompt);
 		nread = getline(&input, &len, stdin);
-		if (!nread || nread == -1)
-			break;
 		input[strcspn(input, "\n")] = '\0';
-		if (input[0] == '\0')
+		/* this is to get rid of the \n at end of input*/
+		if (*input == '\0')
 			continue;
-		if (strcmp(input, "exit") == 0)
-			free(input), exit(EXIT_SUCCESS);
-		if (strcmp(input, "env") == 0)
-		{
-			print_env(env);
-			continue;
-		} parse_input(input, cmd), fstat(STDIN_FILENO, &statbuf);
-		path = get_path(cmd[0], env);
+		/* handle regular input vs pipe */
+		fstat(STDIN_FILENO, &statbuf);
 		if (S_ISFIFO(statbuf.st_mode))
-			return (execve(path, cmd, env));
-		child = fork();
+			return (execve(input, cmd, env));
+		child = fork(); /* copy of current process, return 0 or -1 */
 		if (child == -1)
 		{
-			perror(argv[0]);
+			fprintf(stderr, "Error creating child process");
 			return (1);
 		} else if (child == 0)
-			return (execve(path, cmd, env));
+		{
+			/* on success, execve returns 0, -1 on failure */
+			return (execve(input, cmd, env));
+		}
+		/* parent process waits on child*/
 		wait(&status);
 		if (status != 0)
-			perror(argv[0]);
-		free(path), free(input), free_input(cmd);
+			printf("%s: No such file or directory\n", argv[0]);
+		free(input);
 		input = NULL;
-	} while (nread != -1);
-	free(input), write(STDOUT_FILENO, "\n", 1);
+	}
+	printf("\n");
 	return (0);
 }

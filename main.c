@@ -33,8 +33,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char *env[])
 			print_env(env);
 			continue;
 		} parse_input(input, cmd);
-		path = get_path(cmd[0], env);
-		child = fork();
+		path = get_path(cmd[0], env), child = fork();
 		if (child == -1)
 		{
 			perror(argv[0]);

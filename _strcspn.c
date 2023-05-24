@@ -3,7 +3,7 @@
 /**
  * _strcspn - a function that gets the length of a prefix substring.
  * @s: the string
- * @accept: the prefix string to search
+ * @reject: the prefix string to search
  *
  * Return: the number of bytes in te initial segment of s
  * which consist only of bytes bytes not in reject.

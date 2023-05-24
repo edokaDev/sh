@@ -8,6 +8,10 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-
+void parse_input(char *input, char **cmd);
+void print_env(char *envp[]);
+char *get_path(char *input, char **envp);
+void free_input(char **cmd);
+struct stat statbuf;
 
 #endif /* MAIN_H */

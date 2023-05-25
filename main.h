@@ -20,7 +20,8 @@ char *_strcpy(char *dest, char *src);
 unsigned int _strcspn(char *s, char *reject);
 char *_strdup(char *str);
 int _strlen(char *s);
-int _execve(char *path, char **cmd, char **env, char **argv, char *input, int not_pipe);
+int _execve(char *path, char **cmd, char **env,
+		char **argv, char *input, int not_pipe);
 
 
 #endif /* MAIN_H */

@@ -15,28 +15,13 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char *env[])
 	ssize_t nread = 0;
 	int not_pipe;
 
-	not_pipe = !isatty(STDIN_FILENO);
-
 	do {
+		not_pipe = isatty(STDIN_FILENO);
 		if (not_pipe == 1)
-			nread = getline(&input, &len, stdin);
-		else
-		{
 			write(STDOUT_FILENO, prompt, _strlen(prompt));
-			nread = getline(&input, &len, stdin);
-		}
+		nread = getline(&input, &len, stdin);
 		if (!nread || nread == -1)
-		{
-			if (feof(stdin))
-			{
-				break;
-			}
-			else
-			{
-				perror("getline");
-				break;
-			}
-		}
+			break;
 		input[_strcspn(input, "\n")] = '\0';
 		if (input[0] == '\0')
 			continue;

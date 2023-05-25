@@ -69,6 +69,8 @@ int _execve(char *path, char **cmd, char **env,
 	pid_t child;
 	int status;
 
+	if (not_pipe == 0)
+		return (execve(input, cmd, env));
 	child = fork();
 	if (child == -1)
 	{
@@ -79,8 +81,6 @@ int _execve(char *path, char **cmd, char **env,
 	wait(&status);
 	if (status != 0)
 		perror(argv[0]);
-	if (not_pipe == 0)
-		return (execve(input, cmd, env));
 	free(path), free(input), free_input(cmd);
 
 	return (-1);

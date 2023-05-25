@@ -11,7 +11,7 @@
 int main(int __attribute__ ((unused)) argc, char *argv[], char *env[])
 {
 	char *input = NULL, *prompt = "$ ", *cmd[50], *path, buffer[BUFFER_SIZE];
-	int not_pipe, nread;
+	int not_pipe, nread, exec_status;
 
 	do {
 		not_pipe = isatty(STDIN_FILENO);
@@ -37,11 +37,13 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char *env[])
 		} parse_input(input, cmd);
 		path = get_path(cmd[0], env);
 		if (path[0] == '/')
-			_execve(path, cmd, env, argv, input, not_pipe);
-		else
+		{
+			exec_status = _execve(path, cmd, env, argv, input, not_pipe);
+			if (exec_status != 0) /* error in command, usually invalid args */
+				perror(argv[0]);
+		} else /*command not found*/
 			free(path), free(input), free_input(cmd), perror(argv[0]);
 		input = NULL;
-
 	} while (nread != 0);
 	if (input != NULL)
 		free(input);

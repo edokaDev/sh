@@ -30,8 +30,6 @@ int _execve(char *path, char **cmd, char **env,
 	} else if (child == 0)
 		return (execve(path, cmd, env));
 	wait(&status);
-	if (status != 0)
-		perror(argv[0]);
 	free(path), free(input), free_input(cmd);
 	return (0);
 }

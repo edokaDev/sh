@@ -19,7 +19,7 @@ int _execve(char *path, char **cmd, char **env,
 
 	if (not_pipe == 0)
 	{
-		execve(input, cmd, env);
+		execve(path, cmd, env);
 		exit(EXIT_SUCCESS);
 	}
 	child = fork();

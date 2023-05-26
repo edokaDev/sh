@@ -28,13 +28,13 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char *env[])
 		} _strcpy(input, buffer);
 		if (input[0] == '\0')
 			continue;
-		if (_strcmp(input, "exit") == 0)
-			free(input), exit(EXIT_SUCCESS);
 		if (_strcmp(input, "env") == 0)
 		{
 			print_env(env);
 			continue;
 		} parse_input(input, cmd);
+		if (_strcmp(cmd[0], "exit") == 0)
+			handle_exit(input, cmd, argv);
 		path = get_path(cmd[0], env);
 		if (path[0] == '/')
 		{

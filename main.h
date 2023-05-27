@@ -19,7 +19,7 @@ int _execve(char *path, char **cmd, char **env,
 int _getline(char *buffer);
 void handle_exit(char *input, char **cmd, char *argv[]);
 int cd_cmd(char **cmd);
-int run_commands(char *input, char **env, char **argv, int);
+int run_commands(char *input, char **env, char **argv);
 
 /* string functions */
 char *_strcat(char *dest, char *src);

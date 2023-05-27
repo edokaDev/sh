@@ -15,11 +15,11 @@ void print_env(char *envp[]);
 char *get_path(char *input, char **envp);
 void free_input(char **cmd);
 int _execve(char *path, char **cmd, char **env,
-	char **argv, char *input, int not_pipe);
+	char **argv, char *input);
 int _getline(char *buffer);
 void handle_exit(char *input, char **cmd, char *argv[]);
 int cd_cmd(char **cmd);
-int run_commands(char *input, char **env, char **argv, int not_pipe);
+int run_commands(char *input, char **env, char **argv, int);
 
 /* string functions */
 char *_strcat(char *dest, char *src);

@@ -14,6 +14,7 @@ int run_commands(char *input, char **env, char **argv, int not_pipe)
 	char *cmd[50], *path;
 	int exec_status;
 
+	(void) not_pipe;
 	if (input[0] == '\0')
 	{
 		free(input);
@@ -43,6 +44,6 @@ int run_commands(char *input, char **env, char **argv, int not_pipe)
 	}
 	free(cmd[0]);
 	cmd[0] = path;
-	exec_status = _execve(path, cmd, env, argv, input, not_pipe);
-	return (0);
+	exec_status = _execve(path, cmd, env, argv, input);
+	return (exec_status);
 }

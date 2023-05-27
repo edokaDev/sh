@@ -15,14 +15,13 @@ int _getline(char *buffer)
 	if (current >= bytes_read)
 	{
 		bytes_read = read(STDIN_FILENO, buf, BUFFER_SIZE - 1);
-		if (bytes_read == -1)
+		if (bytes_read <= 0)
 		{
-			perror("read");
-			exit(1);
+			return (-1);
 		}
 		current = 0;
 	}
-	for (size = 0; buf[current + size] != '\n' && buf[current + size] != '\0'; size++;)
+	for (size = 0; buf[current + size] != '\n' && buf[current + size] != '\0'; size++)
 	{
 
 	}
@@ -30,5 +29,5 @@ int _getline(char *buffer)
 	strncat(buffer, buf + current, size);
 	current = current + size + 1;
 
-	return (size);
+	return (size + 1);
 }

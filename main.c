@@ -19,7 +19,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char *env[])
 		if (not_pipe == 1)
 			write(STDOUT_FILENO, prompt, _strlen(prompt));
 		nread = _getline(buffer);
-		if (nread == 0)
+		if (nread < 0)
 			break;
 		input = malloc(sizeof(char) * nread);
 		if (input == NULL)

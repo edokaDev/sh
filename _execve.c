@@ -12,16 +12,11 @@
  */
 
 int _execve(char *path, char **cmd, char **env,
-		char **argv, char *input, int not_pipe)
+		char **argv, char *input)
 {
 	pid_t child;
 	int status;
 
-	if (not_pipe == 0)
-	{
-		execve(path, cmd, env);
-		exit(EXIT_FAILURE);
-	}
 	child = fork();
 	if (child == -1)
 	{
@@ -33,6 +28,6 @@ int _execve(char *path, char **cmd, char **env,
 		exit(EXIT_FAILURE);
 	}
 	wait(&status);
-	free(path), free(input), free_input(cmd);
+	free(input), free_input(cmd);
 	return (0);
 }

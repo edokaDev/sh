@@ -12,7 +12,7 @@
 char *get_path(char *input, char **envp)
 {
 	int i = 0;
-	char *curr_path = NULL, *paths = NULL, *curr_copy = NULL, *result = NULL;
+	char *curr_path = NULL, *paths = NULL, *curr_copy = NULL;
 
 	if (access(input, F_OK) == 0)
 		return (strdup(input));

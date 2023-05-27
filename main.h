@@ -19,7 +19,7 @@ int _execve(char *path, char **cmd, char **env,
 	char **argv, char *input);
 int _getline(char *buffer);
 void handle_exit(char *input, char **cmd, char *argv[]);
-void cd_cmd(char **cmd);
+int cd_cmd(char **cmd);
 int run_commands(char *input, char **env, char **argv);
 
 /* string functions */
@@ -31,7 +31,6 @@ char *_strdup(char *str);
 int _strlen(char *s);
 int _unsetenv(char **cmd);
 int _setenv(char **cmd);
-char *stripWhitespace(const char* input);
 
 
 #endif /* MAIN_H */

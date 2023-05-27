@@ -26,8 +26,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char *env[])
 		{
 			perror(argv[0]);
 			return (1);
-		} 
-		input = stripWhitespace(buffer);
+		} strcpy(input, buffer);
 		run_commands(input, env, argv);
 		input = NULL;
 	}

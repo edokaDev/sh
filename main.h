@@ -21,6 +21,7 @@ int _getline(char *buffer);
 void handle_exit(char *input, char **cmd, char *argv[]);
 int cd_cmd(char **cmd);
 int run_commands(char *input, char **env, char **argv);
+void remove_comments(char *buf);
 
 /* string functions */
 char *_strcat(char *dest, char *src);

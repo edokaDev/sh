@@ -43,7 +43,7 @@ int run_commands(char *input, char **env, char **argv)
 	path = get_path(cmd[0], env);
 	if (path == NULL)
 	{
-		perror("path not found");
+		perror(argv[0]);
 		return (0);
 	}
 	free(cmd[0]);

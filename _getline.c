@@ -8,14 +8,27 @@
 */
 int _getline(char *buffer)
 {
-	int byte_read;
+	static int bytes_read, current;
+	int size;
+	static char buf[BUFFER_SIZE];
 
-	byte_read = read(STDIN_FILENO, buffer, BUFFER_SIZE - 1);
-	if (byte_read == -1)
+	if (current >= bytes_read)
 	{
-		perror("read");
-		exit(1);
+		bytes_read = read(STDIN_FILENO, buf, BUFFER_SIZE - 1);
+		if (bytes_read == -1)
+		{
+			perror("read");
+			exit(1);
+		}
+		current = 0;
 	}
-	buffer[byte_read - 1] = '\0';
-	return (byte_read);
+	for (size = 0; buf[current + size] != '\n' && buf[current + size] != '\0'; size++;)
+	{
+
+	}
+	buffer[0] = 0;
+	strncat(buffer, buf + current, size);
+	current = current + size + 1;
+
+	return (size);
 }

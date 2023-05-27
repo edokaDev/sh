@@ -33,9 +33,11 @@ void handle_exit(char *input, char **cmd, char *argv[])
 			free(buffer);
 			exit(2);
 		}
+		free_input(cmd);
 		free(buffer);
 		exit(n);
 	}
+	free_input(cmd);
 	exit(EXIT_SUCCESS);
 
 }

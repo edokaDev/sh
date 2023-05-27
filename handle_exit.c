@@ -15,7 +15,8 @@ void handle_exit(char *input, char **cmd, char *argv[])
 
 
 	char *buffer;
-	char *err = " 1: exit: Illegal number: ";
+	char *str_num = " 1: exit: Illegal number: ";
+	char *neg_num = " 1 exit: Illegal number: ";
 
 	free(input);
 	if (cmd[1] != NULL)
@@ -23,11 +24,14 @@ void handle_exit(char *input, char **cmd, char *argv[])
 		n = atoi(cmd[1]);
 
 		buffer = malloc(sizeof(char) *
-			(_strlen(argv[0]) + _strlen(err) + _strlen(cmd[1]) + 1));
+			(_strlen(argv[0]) + _strlen(str_num) + _strlen(cmd[1]) + 1));
 
 		if (n < 0 || (n < 10 && _strlen(cmd[1]) > 1))
 		{
-			_strcat(_strcat(_strcat(buffer, argv[0]), err), cmd[1]);
+			if (n < 0)
+				_strcat(_strcat(_strcat(buffer, argv[0]), neg_num), cmd[1]);
+			else
+				_strcat(_strcat(_strcat(buffer, argv[0]), str_num), cmd[1]);
 			write(STDERR_FILENO, buffer, _strlen(buffer));
 			write(STDERR_FILENO, "\n", 1);
 			free(buffer);

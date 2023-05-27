@@ -24,11 +24,11 @@ int cd_cmd(char **cmd)
 		return (0);
 	}
 
-	if (_strcmp(cmd[1], "-") == 0)
+	if (strcmp(cmd[1], "-") == 0)
 	{
 		chdir(oldpwd);
 		setenv("OLDPWD", current, 1), setenv("PWD", oldpwd, 1);
-		write(STDOUT_FILENO, oldpwd, _strlen(oldpwd));
+		write(STDOUT_FILENO, oldpwd, strlen(oldpwd));
 		write(STDOUT_FILENO, "\n", 1);
 		free(current), free(buffer), free(oldpwd);
 		return (0);

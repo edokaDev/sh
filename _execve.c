@@ -20,7 +20,7 @@ int _execve(char *path, char **cmd, char **env,
 	if (not_pipe == 0)
 	{
 		execve(path, cmd, env);
-		exit(EXIT_SUCCESS);
+		exit(EXIT_FAILURE);
 	}
 	child = fork();
 	if (child == -1)
@@ -28,7 +28,10 @@ int _execve(char *path, char **cmd, char **env,
 		perror(argv[0]);
 		return (1);
 	} else if (child == 0)
-		return (execve(path, cmd, env));
+	{
+		execve(path, cmd, env);
+		exit(EXIT_FAILURE);
+	}
 	wait(&status);
 	free(path), free(input), free_input(cmd);
 	return (0);

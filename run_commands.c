@@ -19,28 +19,30 @@ int run_commands(char *input, char **env, char **argv, int not_pipe)
 		free(input);
 		return (0);
 	}
-	if (_strcmp(input, "env") == 0)
+	parse_input(input, cmd);
+	if (strcmp(cmd[0], "env") == 0)
 	{
 		free(input);
 		print_env(env);
 		return (0);
-	} parse_input(input, cmd);
-	if (_strcmp(cmd[0], "cd") == 0)
+	}
+	if (strcmp(cmd[0], "cd") == 0)
 	{
 		cd_cmd(cmd);
 		free(input);
 		free_input(cmd);
 		return (0);
 	}
-	if (_strcmp(cmd[0], "exit") == 0)
+	if (strcmp(cmd[0], "exit") == 0)
 		handle_exit(input, cmd, argv);
 	path = get_path(cmd[0], env);
-	if (path[0] == '/')
+	if (path == NULL)
 	{
-		exec_status = _execve(path, cmd, env, argv, input, not_pipe);
-		if (exec_status != 0) /* error in command, usually invalid args */
-			perror(argv[0]);
-	} else /*command not found*/
-		free(path), free(input), free_input(cmd), perror(argv[0]);
+		perror("path not found");
+		return (0);
+	}
+	free(cmd[0]);
+	cmd[0] = path;
+	exec_status = _execve(path, cmd, env, argv, input, not_pipe);
 	return (0);
 }

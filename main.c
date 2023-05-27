@@ -26,7 +26,7 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char *env[])
 		{
 			perror(argv[0]);
 			return (1);
-		} _strcpy(input, buffer);
+		} strcpy(input, buffer);
 		run_commands(input, env, argv, not_pipe);
 		input = NULL;
 	}

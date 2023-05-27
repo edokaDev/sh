@@ -18,6 +18,8 @@ int _execve(char *path, char **cmd, char **env,
 	char **argv, char *input, int not_pipe);
 int _getline(char *buffer);
 void handle_exit(char *input, char **cmd, char *argv[]);
+int cd_cmd(char **cmd);
+int run_commands(char *input, char **env, char **argv, int not_pipe);
 
 /* string functions */
 char *_strcat(char *dest, char *src);
@@ -26,6 +28,6 @@ char *_strcpy(char *dest, char *src);
 unsigned int _strcspn(char *s, char *reject);
 char *_strdup(char *str);
 int _strlen(char *s);
-int cd_cmd(char **cmd);
+
 
 #endif /* MAIN_H */

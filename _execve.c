@@ -7,7 +7,6 @@
  * @env: Environmental variables array
  * @argv: main function arguments array
  * @input: user input
- * @not_pipe: input mode
  * Return: 0 Success and -1 Failure
  */
 

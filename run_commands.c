@@ -34,6 +34,18 @@ int run_commands(char *input, char **env, char **argv, int not_pipe)
 		free_input(cmd);
 		return (0);
 	}
+	if (strcmp(cmd[0], "setenv") == 0)
+	{
+		free(input);
+		_setenv(cmd);
+		return (0);
+	}
+	if (strcmp(cmd[0], "unsetenv") == 0)
+	{
+		free(input);
+		_unsetenv(cmd);
+		return (0);
+	}
 	if (strcmp(cmd[0], "exit") == 0)
 		handle_exit(input, cmd, argv);
 	path = get_path(cmd[0], env);

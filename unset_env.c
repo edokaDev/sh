@@ -4,7 +4,7 @@
  * _unsetenv - unsets an environmental variable
  *
  * @cmd: array of commands from user input
- * Return (0); success
+ * Return: (0) success
  */
 
 int _unsetenv(char **cmd)

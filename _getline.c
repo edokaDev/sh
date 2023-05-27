@@ -21,7 +21,8 @@ int _getline(char *buffer)
 		}
 		current = 0;
 	}
-	for (size = 0; buf[current + size] != '\n' && buf[current + size] != '\0'; size++)
+	for (size = 0;
+			buf[current + size] != '\n' && buf[current + size] != '\0'; size++)
 	{
 
 	}

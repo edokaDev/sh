@@ -6,7 +6,7 @@
  * an existing value if it already exist.
  * Return: 0 on Success
  */
-int _setenv(const char **cmd)
+int _setenv(char **cmd)
 {
 	if (cmd[1] == NULL || cmd[2] == NULL)
 		perror(cmd[0]);

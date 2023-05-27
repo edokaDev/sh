@@ -28,6 +28,7 @@ char *_strcpy(char *dest, char *src);
 unsigned int _strcspn(char *s, char *reject);
 char *_strdup(char *str);
 int _strlen(char *s);
-
+int _unsetenv(char **cmd);
+int _setenv(char **cmd);
 
 #endif /* MAIN_H */

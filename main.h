@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 
 #define BUFFER_SIZE 1024
+#define MAX_PATH_LENGTH 1024
 
 void parse_input(char *input, char **cmd);
 void print_env(char *envp[]);
@@ -18,7 +19,7 @@ int _execve(char *path, char **cmd, char **env,
 	char **argv, char *input);
 int _getline(char *buffer);
 void handle_exit(char *input, char **cmd, char *argv[]);
-int cd_cmd(char **cmd);
+void cd_cmd(char **cmd);
 int run_commands(char *input, char **env, char **argv);
 
 /* string functions */
@@ -30,5 +31,7 @@ char *_strdup(char *str);
 int _strlen(char *s);
 int _unsetenv(char **cmd);
 int _setenv(char **cmd);
+char *stripWhitespace(const char* input);
+
 
 #endif /* MAIN_H */

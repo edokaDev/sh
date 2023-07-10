@@ -1,5 +1,5 @@
 #include "main.h"
-
+int error_no = 0;
 /**
  * main - shell
  * @argc: argument count
@@ -21,14 +21,9 @@ int main(int __attribute__ ((unused)) argc, char *argv[], char *env[])
 		nread = _getline(buffer);
 		if (nread < 0)
 			break;
-		input = malloc(sizeof(char) * nread);
-		if (input == NULL)
-		{
-			perror(argv[0]);
-			return (1);
-		}
 		remove_comments(buffer);
-		strcpy(input, buffer);
+		/*strcpy(input, buffer);*/
+		input = strip_whitespace(buffer);
 		run_commands(input, env, argv);
 		input = NULL;
 	}
